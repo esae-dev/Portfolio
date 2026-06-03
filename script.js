@@ -51,3 +51,24 @@ copyEmailButton.addEventListener("click", function () {
     }, 1600);
   });
 });
+
+// 연락 폼: 입력한 내용으로 이메일 작성 화면 열기
+const contactForm = document.querySelector("#contactForm");
+const formMessage = document.querySelector("#formMessage");
+
+contactForm.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  const name = document.querySelector("#nameInput").value;
+  const senderEmail = document.querySelector("#emailInput").value;
+  const message = document.querySelector("#messageInput").value;
+  const subject = encodeURIComponent("[Portfolio] 연락 메시지");
+  const body = encodeURIComponent(
+    "이름: " + name + "\n" +
+    "이메일: " + senderEmail + "\n\n" +
+    message
+  );
+
+  window.location.href = "mailto:zern35@gmail.com?subject=" + subject + "&body=" + body;
+  formMessage.textContent = "이메일 작성 화면을 열었습니다.";
+});

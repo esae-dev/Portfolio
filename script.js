@@ -72,3 +72,31 @@ contactForm.addEventListener("submit", function (event) {
   window.location.href = "mailto:zern35@gmail.com?subject=" + subject + "&body=" + body;
   formMessage.textContent = "이메일 작성 화면을 열었습니다.";
 });
+
+// 스크롤 시 섹션과 카드가 부드럽게 나타나는 효과
+const revealItems = document.querySelectorAll(".section-title, .info-card, .project-card, .skill-list span, .contact-card, .contact-form");
+
+revealItems.forEach(function (item) {
+  item.classList.add("reveal");
+});
+
+if ("IntersectionObserver" in window) {
+  const revealObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("show");
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.12
+  });
+
+  revealItems.forEach(function (item) {
+    revealObserver.observe(item);
+  });
+} else {
+  revealItems.forEach(function (item) {
+    item.classList.add("show");
+  });
+}
